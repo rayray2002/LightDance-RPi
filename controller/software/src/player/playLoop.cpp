@@ -48,7 +48,8 @@ void write_fifo(bool success) {
     close(wr_fd);
 }
 
-const std::vector<std::string> split(const std::string &str, const std::string &pattern) {
+const std::vector<std::string> split(const std::string &str,
+                                     const std::string &pattern) {
     std::vector<std::string> result;
     std::string::size_type begin, end;
 
@@ -116,7 +117,7 @@ void restart() {
     printf("restart\n");
     playing = false;
 
-    restorePlayer(player, "dancer.dat");
+    restorePlayer(player, "/lightdance/data/dancer.dat");
     led_player = player.myLEDPlayer;
     led_player.init();
     of_player = player.myOFPlayer;
@@ -124,8 +125,10 @@ void restart() {
     fprintf(stderr, "Player loaded\n");
 
     to_terminate = false;
-    led_loop = std::thread(&LEDPlayer::loop, &led_player, &playing, &baseTime, &to_terminate);
-    // of_loop = std::thread(&OFPlayer::loop, &of_player, &playing, &baseTime, &to_terminate);
+    led_loop = std::thread(&LEDPlayer::loop, &led_player, &playing, &baseTime,
+                           &to_terminate);
+    of_loop = std::thread(&OFPlayer::loop, &of_player, &playing, &baseTime,
+                          &to_terminate);
 }
 
 void stop() {

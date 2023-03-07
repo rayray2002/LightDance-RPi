@@ -60,7 +60,7 @@ class Client:
         #     exit()
         # self.dancerName = sys.argv[1]
         # self.dancerName = "Arthur"
-        self.dancerName = os.environ["DANCER_NAME"]
+        # self.dancerName = os.environ["DANCER_NAME"]
 
     def startclient(self):
         while True:
@@ -174,7 +174,6 @@ class Client:
                         "success": True,
                         "info": {
                             "type": "RPi",
-                            "dancerName": self.dancerName,
                             "ip": "127.0.0.1",
                             "hostName": "hostname",
                         },
@@ -184,7 +183,7 @@ class Client:
         )
 
     def on_close(self, ws):
-        print(f"{self.dancerName} closed")
+        print(f"closed")
 
     ####### on_error ########
     # def on_error(self,ws,error):
